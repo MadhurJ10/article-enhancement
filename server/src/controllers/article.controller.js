@@ -9,15 +9,12 @@ class articleController{
     improve = async (req ,res, next) => {
         try {
             const { id } = req.body;
-            console.log("from controller")
 
-
-            const article = await this.articleService.getArticle(id);
-            console.log("after service hit")
-
+            const improve = await this.articleService.improveArticle();
+            
             return res.json({
-                msg:"workingdfds",
-                article
+                msg:"worked",
+                save
             })
         } catch (error) {
             
