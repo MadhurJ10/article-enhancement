@@ -1,6 +1,6 @@
-import articleModel from "../../models/article.model";
-import { AppError } from "../../utils/errors";
-import IArticleRepo from "../contracts/IArticleRepo";
+import articleModel from "../../models/article.model.js";
+import { AppError } from "../../utils/errors.js";
+import IArticleRepo from "../contracts/IArticleRepo.js";
 
 
 class MongoArticleRepo extends IArticleRepo{
@@ -12,8 +12,13 @@ class MongoArticleRepo extends IArticleRepo{
 
     }
 
-    async getArticle(){
-
+    async getArticle(id){
+        try {
+            console.log("from mogo")
+            return articleModel.findById(id);
+        } catch (error) {
+            
+        }
     }
 
     async deleteArticle(){
@@ -28,3 +33,5 @@ class MongoArticleRepo extends IArticleRepo{
         }
     }
 }
+
+export default MongoArticleRepo;
