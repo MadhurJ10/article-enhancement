@@ -1,13 +1,28 @@
-import express from "express"
-import startScraping from "./services/scrapeBeyondChats.js";
-import articleRoute from "./routes/article.route.js"
-import cors from 'cors'
+import express from "express";
+import cors from "cors";
+import articleRoute from "./routes/article.route.js";
 
 const app = express();
 
+/* 🔥 FORCE CORS (Railway-safe) */
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
-app.use(cors());
+/* 🔥 HANDLE PREFLIGHT */
+app.options("*", cors());
+
 app.use(express.json());
-app.use("/api/article" , articleRoute)
+
+app.use("/api/article", articleRoute);
+
+/* 🔥 Root test route */
+app.get("/", (req, res) => {
+  res.send("API live 🚀");
+});
 
 export default app;
