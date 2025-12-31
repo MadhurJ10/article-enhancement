@@ -1,0 +1,215 @@
+# BeyondChats – Article Enhancement Pipeline
+
+This project was developed as part of the Full Stack Web Developer Intern assignment at BeyondChats.  
+The goal of this assignment is to design and implement a complete end-to-end system that scrapes articles, enhances them using real-world ranking content and an LLM, and presents both original and improved versions through a modern web interface.
+
+The system focuses on real-world backend workflows such as web scraping, search integration, content processing, LLM orchestration, API design, and frontend consumption.
+
+------------------------------------------------------------
+
+PROJECT OVERVIEW
+
+The application works in three major phases:
+
+1. Scraping articles from the BeyondChats blog.
+2. Enhancing articles using Google search results and an LLM.
+3. Displaying original and enhanced articles in a responsive frontend.
+
+The pipeline closely simulates how real content optimization and publishing systems work in production environments.
+
+------------------------------------------------------------
+
+TECH STACK
+
+Backend:
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- Axios
+- Cheerio
+- Google SERP API
+- LLM API (Gemini / OpenAI)
+
+Frontend:
+- React.js
+- Tailwind CSS
+- Axios
+
+------------------------------------------------------------
+
+PHASE 1 – ARTICLE SCRAPING & CRUD APIs
+
+- Scraped the five oldest articles from the BeyondChats blogs section:
+  https://beyondchats.com/blogs/
+- Extracted:
+  - Title
+  - Source URL
+  - Original content
+- Stored scraped articles in MongoDB
+- Designed a clean article schema with timestamps
+- Implemented complete CRUD APIs:
+  - Create article
+  - Get all articles
+  - Get article by ID
+  - Update article
+  - Delete article
+
+This phase establishes a persistent data layer and reusable API foundation.
+
+------------------------------------------------------------
+
+PHASE 2 – ARTICLE ENHANCEMENT PIPELINE (CORE LOGIC)
+
+This phase focuses on automated content improvement using external references and an LLM.
+
+Workflow:
+
+1. Fetch article from internal API.
+2. Search the article title on Google using SERP API.
+3. Filter search results to identify blog/article links from other websites.
+4. Select the top two relevant external articles.
+5. Scrape the main content from those external sources.
+6. Clean and normalize scraped content (remove HTML noise, scripts, ads).
+7. Combine:
+   - Original article content
+   - External reference content
+8. Send structured input to an LLM to:
+   - Improve clarity
+   - Enhance formatting
+   - Align content structure with high-ranking articles
+9. Store the improved article in the database.
+10. Append reference URLs at the bottom of the improved article.
+
+The enhanced article is published using the same CRUD APIs, ensuring a consistent data flow.
+
+------------------------------------------------------------
+
+PHASE 3 – FRONTEND APPLICATION
+
+- Built a React-based frontend application.
+- Fetches articles from backend APIs.
+- Displays:
+  - Original article content
+  - Improved article content
+- Supports basic actions:
+  - Create article
+  - Improve article
+  - Delete article
+- Responsive and clean UI using Tailwind CSS.
+- Designed to be simple, professional, and assignment-focused.
+
+------------------------------------------------------------
+
+SYSTEM ARCHITECTURE & DATA FLOW
+
+BeyondChats Blogs
+        ↓
+Web Scraper
+        ↓
+MongoDB
+        ↓
+CRUD APIs (Node.js + Express)
+        ↓
+Google Search (SERP API)
+        ↓
+External Blog Scraper
+        ↓
+Content Cleaning & Processing
+        ↓
+LLM (Article Enhancement)
+        ↓
+Improved Article + References
+        ↓
+React Frontend UI
+
+------------------------------------------------------------
+
+DATABASE SCHEMA (SIMPLIFIED)
+
+Article:
+- title: String
+- sourceUrl: String
+- originalContent: String
+- improvedContent: String | null
+- references: [String]
+- isImproved: Boolean
+- createdAt: Date
+- updatedAt: Date
+
+------------------------------------------------------------
+
+LOCAL SETUP INSTRUCTIONS
+
+Prerequisites:
+- Node.js (v18+ recommended)
+- MongoDB (local or cloud)
+- Google SERP API key
+- LLM API key (Gemini / OpenAI)
+
+Backend Setup:
+
+1. Clone the repository
+   git clone <repository-url>
+
+2. Navigate to backend folder
+   cd server
+
+3. Install dependencies
+   npm install
+
+4. Create a .env file
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   SERP_API_KEY=your_serp_api_key
+   LLM_API_KEY=your_llm_api_key
+
+5. Start backend server
+   npm run dev
+
+Frontend Setup:
+
+1. Navigate to frontend folder
+   cd client
+
+2. Install dependencies
+   npm install
+
+3. Start frontend
+   npm run dev
+
+------------------------------------------------------------
+
+LIVE LINKS
+
+Frontend:
+- https://article-enhancement-bkek2x3pc-madhurbhawsar7-gmailcoms-projects.vercel.app/
+
+Backend API:
+- article-enhancementserver-production.up.railway.app/
+
+------------------------------------------------------------
+
+CODE QUALITY & DEVELOPMENT PRACTICES
+
+- Modular folder structure (controllers, services, repositories)
+- Separation of concerns
+- Proper error handling
+- Async/await based APIs
+- Clean data flow between services
+- Frequent commits to reflect development journey
+
+------------------------------------------------------------
+
+SUBMISSION NOTES
+
+- Repository is public for evaluation.
+- Code is original and written specifically for this assignment.
+- Architecture diagram is included in the repository.
+- The project is fully functional end-to-end.
+
+------------------------------------------------------------
+
+AUTHOR
+
+Madhur Bhawsar  
+Full Stack Developer
