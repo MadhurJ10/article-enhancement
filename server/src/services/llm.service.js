@@ -13,9 +13,6 @@ class LLMService {
         });
     }
 
-    /**
-     * Improve article content using reference articles
-     */
     async improveArticle(originalContent, referenceOne, referenceTwo) {
         try {
             const prompt = `${improveArticlePrompt}

@@ -10,9 +10,7 @@ class ScrapeService {
     };
   }
 
-  /**
-   * Scrape main article content from a URL
-   */
+  
   async scrapeArticle(url) {
     try {
       const response = await axios.get(url, {
@@ -37,9 +35,6 @@ class ScrapeService {
     }
   }
 
-  /**
-   * Scrape top two articles from Google search results
-   */
   async scrapeTopTwo(urls) {
     if (!Array.isArray(urls) || urls.length < 2) {
       throw new AppError("Invalid URLs for scraping", 400);
@@ -73,7 +68,7 @@ class ScrapeService {
       ".content"
     ];
 
-    // 1️⃣ Try common semantic selectors
+    
     for (const selector of selectors) {
       const text = $(selector).text().trim();
       if (text.length > 500) {
@@ -81,7 +76,7 @@ class ScrapeService {
       }
     }
 
-    // 2️⃣ Fallback: longest text block heuristic
+
     let longestText = "";
 
     $("body *").each((_, el) => {
@@ -94,9 +89,7 @@ class ScrapeService {
     return this.cleanText(longestText);
   }
 
-  /**
-   * Basic text cleanup
-   */
+  
   cleanText(text) {
     return text
       .replace(/\s+/g, " ")

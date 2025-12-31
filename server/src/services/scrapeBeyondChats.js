@@ -2,17 +2,14 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 
 
-// CHANGE THIS if backend runs on different port
 const API_URL = "http://localhost:3000/articles";
 
-// 🔴 Step 1: Last page URL (check pagination manually once)
-const LAST_PAGE_URL = "https://beyondchats.com/blogs/page/8/";
+const LAST_PAGE_URL = "https://beyondchats.com/blogs/page/14/";
 
 async function scrapeLastPage() {
   const { data } = await axios.get(LAST_PAGE_URL);
   const $ = cheerio.load(data);
 
-  // 🔴 Step 2: Get article links (first 5)
   const articleLinks = [];
 
   $("a").each((_, el) => {

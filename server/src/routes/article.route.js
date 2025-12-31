@@ -8,6 +8,7 @@ router.post("/create", articleController.createArticle)
 router.get("/allarticle", articleController.getAllArticle)
 router.get("/getarticle/:id", articleController.getArticle)
 router.delete('/delete', articleController.deleteArticle)
+router.delete('/update', articleController.updateArticle)
 router.post("/improve", articleController.improve)
 
 export default router;

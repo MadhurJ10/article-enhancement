@@ -78,6 +78,24 @@ class articleController {
         }
     }
 
+
+    updateArticle = async (req , res , next) => {
+        try {
+            const { id } = req.params
+            const data = req.body
+            const update = await this.articleService.updateArticle(id ,data);
+
+             return res.status(201).json({
+                success: true,
+                msg: "update succes",
+                data: update
+            });
+            
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }
 
 export default new articleController()
