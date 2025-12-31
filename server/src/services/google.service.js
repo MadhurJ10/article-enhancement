@@ -30,7 +30,8 @@ class GoogleService {
                 .map(r => r.link)
                 .filter(link =>
                     link &&
-                    !link.includes("beyondchats.com")
+                    !link.includes("beyondchats.com") &&
+                    !link.includes("medium.com")
                 )
                 .slice(0, 2);
 
