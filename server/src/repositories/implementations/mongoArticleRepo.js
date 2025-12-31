@@ -3,33 +3,41 @@ import { AppError } from "../../utils/errors.js";
 import IArticleRepo from "../contracts/IArticleRepo.js";
 
 
-class MongoArticleRepo extends IArticleRepo{
-    async createArticle(){
+class MongoArticleRepo extends IArticleRepo {
+    async createArticle(data) {
+    try {
+        return await articleModel.create(data); // 👈 directly pass data
+    } catch (error) {
+        throw new AppError(error.message, 500);
+    }
+}
+
+    async getAllArticle() {
 
     }
 
-    async getAllArticle(){
-
-    }
-
-    async getArticle(id){
+    async getArticle(id) {
         try {
             console.log("from mogo")
             return articleModel.findById(id);
         } catch (error) {
-            
+
         }
     }
 
-    async deleteArticle(){
+    async deleteArticle() {
 
     }
 
-    async updateArticle(id , update){
+    async updateArticle(id, update) {
         try {
-            return await articleModel.findByIdAndUpdate(id , update);
+            return await articleModel.findByIdAndUpdate(
+                id,
+                update,
+                { new: true, runValidators: true }
+            );
         } catch (error) {
-            throw new AppError("failed");
+            throw new AppError("Failed to update article", 500);
         }
     }
 }
