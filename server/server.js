@@ -2,8 +2,8 @@ import app from "./src/app.js"
 import { connectDB } from "./src/config/database.js";
 import config from "./src/config/environment.js"
 
+const PORT = process.env.PORT || config.PORT || 5000;
 
-const { PORT } = config
 
 
 async function startServer() {
