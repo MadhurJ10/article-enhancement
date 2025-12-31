@@ -1,65 +1,3 @@
-// import { GoogleGenerativeAI } from "@google/generative-ai";
-// import { AppError } from "../utils/errors.js";
-// import config from "../config/environment.js";
-// import improveArticlePrompt from "../lib/prompt/improveArticle.js";
-
-
-// const { GOOGLE_API_KEY } = config;
-
-// class LLMService {
-//     constructor() {
-//         this.genAI = new GoogleGenerativeAI(GOOGLE_API_KEY);
-//         this.model = this.genAI.getGenerativeModel({
-//             model: "gemini-2.0-flash"
-//         });
-//     }
-
-//     /**
-//      * Improve article content using reference articles
-//      */
-//     async improveArticle(originalContent, referenceOne, referenceTwo) {
-//         try {
-// //             const prompt = `${improveArticlePrompt}
-// //       CONFIG :
-// //       Original Article:
-// // """
-// // ${originalContent}
-// // """
-
-// // Reference Article 1:
-// // """
-// // ${referenceOne}
-// // """
-
-// // Reference Article 2:
-// // """
-// // ${referenceTwo}
-// // ""
-// //       `
-
-// const prompt = "capital of india"
-
-//             const result = await this.model.generateContent(prompt);
-//             const response = result.response.text();
-
-//             if (!response) {
-//                 throw new Error("Empty Gemini response");
-//             }
-
-//             return response.trim();
-//         } catch (error) {
-//             console.error("Gemini error:", error.message);
-//             throw new AppError(
-//                 "Failed to improve article using Gemini",
-//                 500
-//             );
-//         }
-//     }
-// }
-
-// export default new LLMService();
-
-
 
 import Groq from "groq-sdk";
 import { AppError } from "../utils/errors.js";
@@ -80,25 +18,25 @@ class LLMService {
      */
     async improveArticle(originalContent, referenceOne, referenceTwo) {
         try {
-//             const prompt = `${improveArticlePrompt}
+            const prompt = `${improveArticlePrompt}
 
-// ORIGINAL ARTICLE:
-// """
-// ${originalContent}
-// """
+ORIGINAL ARTICLE:
+"""
+${originalContent}
+"""
 
-// REFERENCE ARTICLE 1:
-// """
-// ${referenceOne}
-// """
+REFERENCE ARTICLE 1:
+"""
+${referenceOne}
+"""
 
-// REFERENCE ARTICLE 2:
-// """
-// ${referenceTwo}
-// """
-// `;
+REFERENCE ARTICLE 2:
+"""
+${referenceTwo}
+"""
+`;
 
-const prompt = "what is capital of india"
+// const prompt = "what is capital of india"
 
             const completion =
                 await this.client.chat.completions.create({

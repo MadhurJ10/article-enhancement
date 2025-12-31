@@ -1,4 +1,5 @@
 import MongoArticleRepo from "../repositories/implementations/mongoArticleRepo.js";
+import { cleanText } from "../utils/cleanText.js";
 import { AppError } from "../utils/errors.js";
 import GoogleService from "./google.service.js";
 import llmService from "./llm.service.js";
@@ -20,6 +21,14 @@ class articleService{
         return exist;
     }
 
+    async updateArticle(id , data){
+        const update = await this.articleRepo.updateArticle(id ,data) 
+
+        if(!update) throw new AppError("NOT UPDATED" , 400)
+
+            return update
+    }
+
     async improveArticle(id){
         const article = await this.getArticle(id); //get the orignal article 
 
@@ -27,13 +36,16 @@ class articleService{
         console.log(search);
         
         const scrapedArticles = await scrapeService.scrapeTopTwo(search);
-        // console.log(scrapedArticles[0].content);
-        const improve = await llmService.improveArticle("hehe" , "hehe" , "hhehe");
-        console.log(improve)
-        return article
-        //scrape service add here
 
-        //google search result 
+        const ref1 = cleanText(scrapedArticles[0].content)
+        const ref2 = cleanText(scrapedArticles[1].content)
+        
+        const improve = await llmService.improveArticle("it is for scalabitly and ", ref1, ref2);
+        console.log(improve)
+
+        const update = await this.updateArticle(id ,improve);
+
+        return article
     }
 }
 

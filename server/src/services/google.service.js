@@ -31,7 +31,10 @@ class GoogleService {
                 .filter(link =>
                     link &&
                     !link.includes("beyondchats.com") &&
-                    !link.includes("medium.com")
+                    !link.includes("medium.com") &&
+                    !link.includes("in.pinterest.com") &&
+                    !link.includes("amazon.in") &&
+                    !link.includes("roadmap.sh") 
                 )
                 .slice(0, 2);
 
