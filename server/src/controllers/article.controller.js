@@ -10,11 +10,11 @@ class articleController{
         try {
             const { id } = req.body;
 
-            const improve = await this.articleService.improveArticle();
+            const improve = await this.articleService.improveArticle(id);
             
             return res.json({
                 msg:"worked",
-                save
+                improve
             })
         } catch (error) {
             
