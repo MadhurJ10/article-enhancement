@@ -41,8 +41,8 @@ class articleService {
     async improveArticle(id) {
         const article = await this.getArticle(id); //get the orignal article 
 
-        const search = await this.googleService.search("system design"); //get the googles 2 top link
-        console.log(search);
+        const search = await this.googleService.search(article.title); //get the googles 2 top link
+        // console.log(search);
 
         const scrapedArticles = await scrapeService.scrapeTopTwo(search);
 

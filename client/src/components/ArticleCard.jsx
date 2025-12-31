@@ -7,6 +7,7 @@ export default function ArticleCard({ article }) {
         {article.title}
       </h2>
 
+
       <span
         className={`inline-block text-xs px-2 py-1 rounded mb-3 ${
           article.isImproved

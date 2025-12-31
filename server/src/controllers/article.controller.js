@@ -51,7 +51,9 @@ class articleController {
 
     getArticle = async (req, res, next) => {
         try {
-            const { id } = req.body;
+            const { id } = req.params;
+            console.log(id);
+            
             const article = await this.articleService.getArticle(id);
             return res.status(201).json({
                 success: true,

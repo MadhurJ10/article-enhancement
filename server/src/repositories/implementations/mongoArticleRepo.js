@@ -22,10 +22,11 @@ class MongoArticleRepo extends IArticleRepo {
 
     async getArticle(id) {
         try {
+            console.log(id);
             console.log("from mogo")
             return articleModel.findById(id);
         } catch (error) {
-
+            throw new AppError(error.message, 500);
         }
     }
 
