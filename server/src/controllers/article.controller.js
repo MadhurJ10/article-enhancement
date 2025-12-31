@@ -35,6 +35,47 @@ class articleController {
         }
     };
 
+    getAllArticle = async (req, res, next) => {
+        try {
+            const all = await this.articleService.getAllArticle();
+
+            return res.status(201).json({
+                success: true,
+                data: all
+            });
+        } catch (error) {
+            next(error)
+        }
+
+    }
+
+    getArticle = async (req, res, next) => {
+        try {
+            const { id } = req.body;
+            const article = await this.articleService.getArticle(id);
+            return res.status(201).json({
+                success: true,
+                data: article
+            });
+        } catch (error) {
+            next(error);
+        }
+
+    }
+
+    deleteArticle = async (req, res, next) => {
+        try {
+            const { id } = req.body
+            const del = await this.articleService.deleteArticle(id);
+            return res.status(201).json({
+                success: true,
+                msg: "delete pass"
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }
 
 export default new articleController()

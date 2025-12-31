@@ -21,6 +21,15 @@ class articleService {
         return exist;
     }
 
+
+    async getAllArticle(){
+        const get = await this.articleRepo.getAllArticle();
+
+        if(!get)  throw new AppError("article not defined", 400);
+
+        return get;
+    }
+
     async updateArticle(id, data) {
         const update = await this.articleRepo.updateArticle(id, data)
 
@@ -65,6 +74,14 @@ class articleService {
     }
 
     return article;
+}
+
+async deleteArticle(id){
+    const del = await this.articleRepo.deleteArticle(id);
+
+    if(!del) throw new AppError("not able to del", 400);
+
+    return del
 }
 }
 

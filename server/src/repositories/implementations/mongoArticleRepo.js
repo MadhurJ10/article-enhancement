@@ -5,15 +5,19 @@ import IArticleRepo from "../contracts/IArticleRepo.js";
 
 class MongoArticleRepo extends IArticleRepo {
     async createArticle(data) {
-    try {
-        return await articleModel.create(data); // 👈 directly pass data
-    } catch (error) {
-        throw new AppError(error.message, 500);
+        try {
+            return await articleModel.create(data); // 👈 directly pass data
+        } catch (error) {
+            throw new AppError(error.message, 500);
+        }
     }
-}
 
     async getAllArticle() {
-
+        try {
+            return await articleModel.find();
+        } catch (error) {
+            throw new AppError(error.message, 500);
+        }
     }
 
     async getArticle(id) {
@@ -25,7 +29,12 @@ class MongoArticleRepo extends IArticleRepo {
         }
     }
 
-    async deleteArticle() {
+    async deleteArticle(id) {
+        try {
+            return await articleModel.findByIdAndDelete(id);
+        } catch (error) {
+            throw new AppError(error.message, 500);
+        }
 
     }
 
